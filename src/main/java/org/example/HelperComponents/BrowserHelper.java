@@ -17,6 +17,10 @@ public class BrowserHelper {
     }
 
     public static void minimiseScreen(){
-
+        ObjectRepository.driver.manage().window().minimize();
     }
+    public static String getTitleOfWindow(){
+        return ObjectRepository.driver.getTitle();
+    }
+
 }

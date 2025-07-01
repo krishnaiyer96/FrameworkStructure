@@ -4,6 +4,7 @@ import org.example.ObjectRepository.ObjectRepository;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 import java.util.Iterator;
 import java.util.List;
@@ -44,7 +45,7 @@ public class PracticePage {
     @FindBy(id = "carselect")
     WebElement carSelectDropDown;
 
-    @FindBy(id = "ui-id-1")
+    @FindBy(id = "//ul[@id='ui-id-1']//a")
     List<WebElement> autoSuggestList;
 
     @FindBy(id = "autosuggest")
@@ -69,9 +70,36 @@ public class PracticePage {
         Thread.sleep(2000);
         for(WebElement options : autoSuggestList){
             if(options.getText().equalsIgnoreCase(courseName)){
+                String selectedOption = options.getText();
+                System.out.println(selectedOption);
                 options.click();
                 break;
             }
         }
+        Thread.sleep(3000);
+    }
+
+    public void checkRadioButtonSelection(String option) throws InterruptedException {
+        switch (option){
+            case "BMW":
+                bmwRadioBtn.click();
+                break;
+            case "BENZ":
+                benzRadioBtn.click();
+                break;
+            case "HONDA":
+                hondaRadioBtn.click();
+                break;
+            default:
+                System.out.println("Please enter valid option");
+
+        }
+        Thread.sleep(3000);
+    }
+
+    public void validateSelectDropDown(String car){
+        Select option = new Select(carSelectDropDown);
+        option.selectByValue(car);
+
     }
 }

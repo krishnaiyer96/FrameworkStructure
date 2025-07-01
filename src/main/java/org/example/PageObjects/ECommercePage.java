@@ -9,6 +9,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.io.IOException;
+
 public class ECommercePage extends AbstractComponents {
 
     WebDriver driver;
@@ -34,7 +36,7 @@ public class ECommercePage extends AbstractComponents {
     By searchField = By.id("searchInput");
 
 
-    public void SearchforItem(String item) throws InterruptedException {
+    public void SearchforItem(String item) throws InterruptedException, IOException {
         waitForElementToAppear(shopButton);
         if(shopNowButton.isDisplayed()){
             System.out.println("Test Case is Successful");

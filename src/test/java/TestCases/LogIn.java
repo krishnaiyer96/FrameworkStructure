@@ -1,16 +1,19 @@
 package TestCases;
 
 import BaseFolder.BaseClass;
+import com.sun.net.httpserver.Authenticator;
 import org.example.HelperComponents.NavigationHelper;
 import org.example.ObjectRepository.Obj;
 import org.example.ObjectRepository.ObjectRepository;
+import org.testng.IRetryAnalyzer;
 import org.testng.annotations.*;
+
 
 import java.io.IOException;
 
 public class LogIn extends BaseClass {
 
-    @Test(groups = {"Regression"})
+    @Test
     public void testLogin() throws InterruptedException, IOException {
         NavigationHelper.navigateTo(ObjectRepository.config.getUrl());
         Obj.landingPage().loginIntoApplication(ObjectRepository.config.getUserName(), ObjectRepository.config.getPassword());

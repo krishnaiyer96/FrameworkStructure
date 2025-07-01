@@ -3,7 +3,6 @@ package org.example.Configurations;
 import org.example.Interface.Config;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -29,5 +28,14 @@ public class AppConfigReader implements Config {
     @Override
     public String getUrl() throws IOException {
         return propertiesFileReader().getProperty(AppConfigKeys.appUrl);
+    }
+
+    @Override
+    public String getImplicitWaitTime() throws IOException {
+        return propertiesFileReader().getProperty(String.valueOf(AppConfigKeys.implicitWaitTime));
+    }
+    @Override
+    public String getParaBankUrl() throws IOException {
+        return propertiesFileReader().getProperty(String.valueOf(AppConfigKeys.paraBankUrl));
     }
 }

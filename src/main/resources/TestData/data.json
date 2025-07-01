@@ -1,0 +1,18 @@
+
+  {
+    "firstName": "Krishna",
+    "lastName": "Iyer",
+    "address": [
+      {
+        "streetNo": "9",
+        "flatName": "Kurian Building",
+        "colonyName": "Snehapuri Colony"
+      },
+      {
+        "streetNo": "10",
+        "flatName": "Fortitude Elina",
+        "colonyName": "ISRO layout"
+      }
+    ]
+
+  }

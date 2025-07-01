@@ -1,16 +1,25 @@
 package BaseFolder;
 
+import io.opentelemetry.api.internal.Utils;
+import org.apache.commons.io.FileUtils;
+import org.example.Configurations.AppConfigReader;
 import org.example.HelperComponents.BrowserHelper;
 import org.example.ObjectRepository.ObjectRepository;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.util.Date;
 import java.util.Properties;
 
 public class BaseClass {
@@ -38,14 +47,34 @@ public class BaseClass {
         }
 
         BrowserHelper.maximiseScreen();
-        ObjectRepository.driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        ObjectRepository.driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Long.parseLong(ObjectRepository.config.getImplicitWaitTime())));
         return ObjectRepository.driver;
 
     }
+    public String getScreenShot(String testCaseName) throws IOException {
+        TakesScreenshot ts = (TakesScreenshot) ObjectRepository.driver;
+        File source = ts.getScreenshotAs(OutputType.FILE);
+        File file = new File(System.getProperty("user.dir") + "\\Reports\\" + testCaseName + ".png");
+        System.out.println(file);
+        FileUtils.copyFile(source, file);
+        return System.getProperty("user.dir") + "\\Reports\\" + testCaseName + ".png";
+    }
+//    public String getScreenShot() throws IOException {
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+//        String timestamp = dateFormat.format(new Date());
+//        TakesScreenshot ts = (TakesScreenshot) ObjectRepository.driver;
+//        File source = ts.getScreenshotAs(OutputType.FILE);
+//        File file = new File(System.getProperty("user.dir") + "\\Reports\\" + timestamp + ".png");
+//        System.out.println(file);
+//        FileUtils.copyFile(source, file);
+//        return System.getProperty("user.dir") + "\\Reports\\" + timestamp + ".png";
+//
+//    }
 
     @AfterMethod(alwaysRun = true)
     public void tearDown(){
         ObjectRepository.driver.close();
         ObjectRepository.driver.quit();
     }
+
 }
